@@ -10,10 +10,18 @@ tabs.forEach((tab) => {
       if (tab.classList.contains('tab_active')) {
          tab.classList.remove('tab_active');
          content[idx].classList.remove('tab__content_active');
-         e.preventDefault();
       } else {
          tab.classList.add('tab_active');
          content[idx].classList.add('tab__content_active');
       }
+
+      if (tab.nextElementSibling?.classList.contains('tab_active')) {
+         tab.nextElementSibling.classList.remove('tab_active');
+         content[idx].nextElementSibling.classList.remove('tab__content_active');
+      }
+      if (tab.previousElementSibling?.classList.contains('tab_active')) {
+         tab.previousElementSibling.classList.remove('tab_active');
+         content[idx].previousElementSibling.classList.remove('tab__content_active');
+      }
    });
-}); // почти ок, не выключается предыдущая активная вкладка при переключении
+}); // почти ок, вперед - назад работает, при переключении крайних - не очень
