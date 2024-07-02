@@ -16,6 +16,23 @@ function nextRotatorCase() {
       idx += 1;
    }
    rotatorCases[idx].classList.add('rotator__case_active');
+
+   switch (rotatorCases[idx].dataset.color) {
+      case 'red':
+         rotatorCases[idx].style.color = 'red';
+         break;
+      case 'green':
+         rotatorCases[idx].style.color = 'green';
+         break;
+      case 'blue':
+         rotatorCases[idx].style.color = 'blue';
+         break;
+      case 'gray':
+         rotatorCases[idx].style.color = 'gray';
+         break;
+      default:
+         rotatorCases[idx].style.color = '#000';
+   }
 }
 
 rotator(); // ok
