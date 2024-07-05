@@ -34,8 +34,6 @@ function getRandomMessage(arr) {
 function sendMessage() {
    input.onkeyup = (e) => {
       if (e.code === 'Enter') {
-         e.preventDefault();
-
          let clientMessage = `<div class="message message_client">
                                  <div class="message__time">${hours}:${minutes}</div>
                                  <div class="message__text">${e.target.value.trim()}</div>
@@ -45,18 +43,32 @@ function sendMessage() {
                                  <div class="message__text">${getRandomMessage(robotMessages)}</div>
                               </div>`;
 
-         if ((e.target.value = '')) {
-            throw new Error('Поле не может быть пустым');
-         } // !!!!
+         e.preventDefault();
+
+         if (e.target.value === '') {
+            alert('Поле не может быть пустым');
+            return;
+         }
 
          messages.innerHTML += clientMessage;
+         input.value = '';
+
          setTimeout(() => {
             messages.innerHTML += robotMessage;
             chat.scrollBy(0, 500);
          }, 1000); // чуть оттянул ответ, так интереснее
+
          chat.scrollBy(0, 500);
       }
    };
 }
 
-// отправка пустого сообщения?
+setInterval(() => {
+   if (chatWidget.classList.contains('chat-widget_active')) {
+      messages.innerHTML += `<div class="message">
+                                 <div class="message__time">${hours}:${minutes}</div>
+                                 <div class="message__text">Вы еще здесь?</div>
+                              </div>`;
+      chat.scrollBy(0, 500);
+   }
+}, 30000); // не разобрался, как добавить условие отсутствия сообщения от пользователя
