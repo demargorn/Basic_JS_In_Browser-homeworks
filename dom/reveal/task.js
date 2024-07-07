@@ -17,4 +17,4 @@ function isInViewport() {
          reveal.classList.remove('reveal_active');
       }
    });
-} // ok
+}

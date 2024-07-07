@@ -39,4 +39,4 @@ function rotator() {
    setInterval(nextRotatorCase, 3500);
 }
 
-rotator(); // ok
+rotator();
