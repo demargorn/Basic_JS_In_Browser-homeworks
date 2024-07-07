@@ -1,16 +1,16 @@
 'use strict';
 
-window.addEventListener('click', changeSize);
-window.addEventListener('click', changeFontColor);
-window.addEventListener('click', changeBackgroundColor);
-
 const fonts = Array.from(document.querySelectorAll('.font-size')); // массив кнопок переключения размера шрифта
 const fontColors = Array.from(document.querySelectorAll('.book__control_color .color')); // массив кнопок переключения цвета шрифта
 const bgColors = Array.from(document.querySelectorAll('.book__control_background .color')); // массив кнопок переключения цвета фона
 const book = document.getElementById('book'); // читалка
 
+window.addEventListener('click', changeSize);
+window.addEventListener('click', changeFontColor);
+window.addEventListener('click', changeBackgroundColor);
+
 function changeSize(e) {
-   const idx = fonts.findIndex((font) => font.classList.contains('font-size_active')); // индекс активного размера шрифта
+   const idx = fonts.findIndex((font) => font.classList.contains('font-size_active')); // индекс кнопки активного размера шрифта
 
    e.preventDefault();
 
@@ -37,7 +37,7 @@ function changeSize(e) {
 }
 
 function changeFontColor(e) {
-   const idx = fontColors.findIndex((fontColor) => fontColor.dataset.textColor); // индекс активного цвета шрифта
+   const idx = fontColors.findIndex((fontColor) => fontColor.dataset.textColor); // индекс кнопки цвета шрифта
 
    e.preventDefault();
 
@@ -64,7 +64,7 @@ function changeFontColor(e) {
    });
 }
 function changeBackgroundColor(e) {
-   const idx = bgColors.findIndex((bgColor) => bgColor.dataset.bgColor); // индекс активного цвета фона
+   const idx = bgColors.findIndex((bgColor) => bgColor.dataset.bgColor); // индекс кнопки цвета фона
 
    e.preventDefault();
 
