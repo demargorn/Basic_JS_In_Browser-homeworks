@@ -15,21 +15,22 @@ const robotMessages = [
    'Из положительных качеств у тебя только резус-фактор',
    'Это набор слов, или мне нужно вдуматься?',
    'Ну и ладно',
+   'Может быть вместо этого хотите жаренных гвоздей?',
    'Дурдом на выезде, психи на природе!',
    'Прости что не оправдал твои стереотипы',
    'Какие вопросы, такие и ответы!',
 ];
 
-chatWidget.addEventListener('click', showChat); // событие: показать окно чата
-input.addEventListener('change', sendMessage); // событие: отправка сообщения в чат
+chatWidget.addEventListener('click', showChat);
+input.addEventListener('change', sendMessage);
 
 function showChat() {
    chatWidget.classList.add('chat-widget_active');
-} // функция показа окна чата
+}
 
 function getRandomMessage(arr) {
    return arr[Math.floor(Math.random() * arr.length)];
-} // функция генерации случайной фразы
+}
 
 function sendMessage() {
    input.onkeyup = (e) => {
