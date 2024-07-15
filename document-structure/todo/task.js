@@ -7,19 +7,18 @@ const btn = document.getElementById('tasks__add'); // кнопка Добави�
 
 btn.addEventListener('click', (e) => {
    e.preventDefault();
-   let newTask = `<div class="task">
-                  <div class="task__title">${input.value}</div>
-                  <a href="#" class="task__remove">&times;</a>
-               </div>`;
-   if (!input.value) {
+   if (!input.value.trim()) {
       alert('Введите новую задачу');
       return;
    }
+   let newTask = `<div class="task">
+                     <div class="task__title">${input.value.trim()}</div>
+                     <a href="#" class="task__remove">&times;</a>
+                  </div>`;
    taskList.insertAdjacentHTML('beforeend', newTask);
 
-   const removes = taskList.querySelectorAll('.task__remove'); // кнопки Удаления
-   removes.forEach((remove) => {
-      remove.onclick = (e) => e.target.closest('.task').remove();
-   });
+   const removes = [...taskList.querySelectorAll('.task__remove')]; // кнопки Удаления
+   const idx = removes.findLastIndex((remove) => remove.querySelectorAll('.task__remove')); // индекс последнего добавленного элемента
+   removes[idx].onclick = (e) => e.target.closest('.task').remove();
    form.reset();
 });
