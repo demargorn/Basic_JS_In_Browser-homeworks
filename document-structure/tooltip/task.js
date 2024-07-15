@@ -4,17 +4,24 @@ const hasTooltips = Array.from(document.querySelectorAll('.has-tooltip')); // с
 
 hasTooltips.forEach((hasTooltip) => {
    const text = hasTooltip.title; // текст подсказки
-   const tooltipText = `<div class="tooltip">${text}</div>`;
-   hasTooltip.insertAdjacentHTML('beforeend', tooltipText);
+   const positionLeft = hasTooltip.getBoundingClientRect().left; // левая гранца нашего слова
+   const positionTop = hasTooltip.getBoundingClientRect().bottom; // нижняя граница нашего слова
+   
+   const div = document.createElement('div'); // создаем элемент подсказки
+   div.classList.add('tooltip');
+   div.textContent = text;
 
    hasTooltip.addEventListener('click', (e) => {
       e.preventDefault();
 
-      hasTooltip.style.display = 'inline-block';
-      e.target.querySelector('.has-tooltip div').classList.add('tooltip_active');
+      div.style.left = positionLeft + 'px';
+      div.style.top = positionTop + 'px';
+      div.classList.add('tooltip_active');
+
+      hasTooltip.insertAdjacentElement('afterEnd', div);
    });
 
-   hasTooltip.addEventListener('blur', (e) => {
-      e.target.querySelector('.has-tooltip div').classList.remove('tooltip_active');
+   hasTooltip.addEventListener('blur', () => {
+      div.remove();
    });
 });
