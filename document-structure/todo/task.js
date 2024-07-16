@@ -18,7 +18,7 @@ btn.addEventListener('click', (e) => {
    taskList.insertAdjacentHTML('beforeend', newTask);
 
    const removes = [...taskList.querySelectorAll('.task__remove')]; // кнопки Удаления
-   const idx = removes.findLastIndex((remove) => remove.querySelectorAll('.task__remove')); // индекс последнего добавленного элемента
-   removes[idx].onclick = (e) => e.target.closest('.task').remove();
+   const last = removes.find((remove, i) => i === removes.length - 1);
+   last.onclick = (e) => e.target.closest('.task').remove();
    form.reset();
 });
