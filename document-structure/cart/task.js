@@ -33,7 +33,7 @@ addButtons.forEach((addButton) => {
       const inBasket = [...basket.querySelectorAll('.cart__product')].find((card) => card.dataset.id === productId); // находим товар в корзине
 
       if (inBasket) {
-         inBasket.querySelector('.cart__product-count').textContent = e.target
+         inBasket.querySelector('.cart__product-count').textContent -= -e.target
             .closest('.product__controls')
             .querySelector('.product__quantity-value').textContent;
       } else {
