@@ -1,16 +1,18 @@
 'use strict';
 
 const poolAnswers = document.getElementById('poll__answers'); // контейнер кнопок
-const xhr = new XMLHttpRequest();
+const poolTitle = document.getElementById('poll__title'); // заголовок
 const url = 'https://students.netoservices.ru/nestjs-backend/poll'; // url
+const xhr = new XMLHttpRequest();
 
 xhr.open('GET', url);
 xhr.getResponseHeader('Content-Type', 'application/json');
+xhr.responseType = 'json';
 
 xhr.addEventListener('readystatechange', () => {
    if (xhr.readyState === xhr.DONE) {
-      const response = JSON.parse(xhr.responseText);
-      poolAnswers.innerText = response.data.title;
+      const response = xhr.response;
+      poolTitle.innerText = response.data.title;
 
       for (let i = 0; i < response.data.answers.length; i += 1) {
          const btn = document.createElement('button');
@@ -18,10 +20,15 @@ xhr.addEventListener('readystatechange', () => {
          btn.style.marginRight = '10px';
 
          btn.innerText = response.data.answers[i];
-
          poolAnswers.insertAdjacentElement('afterend', btn);
-         btn.onclick = () => alert('Спасибо, ваш голос засчитан!');
       }
+
+      const buttons = document.querySelectorAll('.poll__answer'); // кнопки ответа
+      buttons.forEach((button, i) => {
+         button.onclick = () => {
+            alert('Спасибо, ваш голос засчитан!');
+         };
+      });
    }
 });
 xhr.send();
