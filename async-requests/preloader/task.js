@@ -5,14 +5,10 @@ const items = document.getElementById('items'); // контейнер
 const xhr = new XMLHttpRequest();
 const url = 'https://students.netoservices.ru/nestjs-backend/slow-get-courses';
 
-xhr.open('GET', url);
-xhr.getAllResponseHeaders('Content-Type', 'application/json');
-xhr.responseType = 'json';
-
-xhr.addEventListener('readystatechange', () => {
-   if (xhr.readyState === xhr.DONE) {
-      const res = xhr.response;
-      const valutes = res.response.Valute;
+fetch(url)
+   .then((response) => response.json())
+   .then((data) => {
+      const valutes = data.response.Valute;
 
       for (const [code, value] of Object.entries(valutes)) {
          const item = document.createElement('div');
@@ -35,6 +31,5 @@ xhr.addEventListener('readystatechange', () => {
          items.insertAdjacentElement('afterbegin', item);
       }
       loader.classList.remove('loader_active');
-   }
-});
-xhr.send();
+   })
+   .catch((error) => alert(error));
